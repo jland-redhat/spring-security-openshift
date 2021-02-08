@@ -1,0 +1,7 @@
+kind: ImageStream
+apiVersion: image.openshift.io/v1
+metadata:
+  name: {{ $.Values.image.name }}
+spec:
+  lookupPolicy:
+    local: false

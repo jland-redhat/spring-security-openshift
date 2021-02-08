@@ -1,0 +1,13 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: {{ $.Values.name }}-{{ $.Values.port }}
+spec:
+  to:
+    kind: Service
+    name: {{ $.Values.name }}
+  port:
+    targetPort: {{ $.Values.port }}
+  tls:
+    termination: passthrough
+    insecureEdgeTerminationPolicy: Redirect

@@ -1,0 +1,23 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: {{ $.Values.name }}
+spec:
+  output:
+    to:
+      kind: ImageStreamTag
+      name: '{{ $.Values.image.name }}:{{ $.Values.image.tag }}'
+  strategy:
+    type: Source
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        namespace: openshift
+        name: 'java:11'
+  source:
+    type: Git
+    git:
+      uri: 'https://github.com/jland-redhat/spring-security-openshift'
+    contextDir: /
+  triggers:
+  - type: "ConfigChange"
